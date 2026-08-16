@@ -1,5 +1,6 @@
 <script type="text/javascript">
   var page_data = {
+    baseurl: "{{ site.baseurl }}",
     org_name: "{{page.org_name}}",
     org_url: "{{page.org_url}}",
     toc: [],
@@ -22,13 +23,13 @@
   {% for item in page.toc %}
   <h3>{{item.level}}</h3>
   <ul>
-  {% for mission in item.missions %}  <li><a href="/missions/{{ mission }}">{{ site.data.mission_names.mission_names[mission] }}</a></li>
+  {% for mission in item.missions %}  <li><a href="{{ '/missions/' | relative_url }}{{ mission }}">{{ site.data.mission_names.mission_names[mission] }}</a></li>
   {% endfor %}</ul>
   {% endfor %}
 
   <hr>
   <h5>Please enable JavaScript. Currently you're viewing the no-javascript version of the site which lacks proper formatting, mission titles and full-featured navigation.</h5>
-  <p>We use only three JavaScript libraries: Vue.js, axios and Google Analytics. Vue.js and axios are necessary for viewing the content of the learning missions. Google Analytics allows us to track site use and is optional.</p>
+  <p>We use Vue.js to view the content of the learning missions. Google Analytics, which allows us to track site use, is optional and off by default.</p>
   <hr>
 
 </noscript>
@@ -67,9 +68,12 @@
 </script>
 
 <div id="app" v-cloak>
-  <a :href="'/org/'+this.page_data.org_url">{{ this.page_data.org_name }}</a> /
+  <!-- This markup sits in a Markdown page, and kramdown escapes any tag whose
+       attribute name it cannot parse. `:href` (leading colon) is not a valid
+       XML name, so the long form `v-bind:href` is required here. -->
+  <a v-bind:href="page_data.baseurl + '/org/' + page_data.org_url">{{ page_data.org_name }}</a> /
   <span v-if="current_mission">
-    <router-link to="/" >{{ this.page_data.title }}</router-link> /
+    <router-link to="/" >{{ page_data.title }}</router-link> /
   </span>
   <router-view></router-view>
 </div>

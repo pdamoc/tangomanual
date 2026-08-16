@@ -8,9 +8,9 @@ title: The Tango Challenge
 
 [Weekly Journal](http://www.oxygentango.com/journal-tango-challenge)
 
-1. [Practica Ethno](/org/challenge/practicaethno/#/)
-2. [Tango Reporter](/org/challenge/tangoreporter/#/)
-3. [First Cabeceo](/org/challenge/firstcabeceo/#/)
+1. [Practica Ethno]({{ "/org/challenge/practicaethno/#/" | relative_url }})
+2. [Tango Reporter]({{ "/org/challenge/tangoreporter/#/" | relative_url }})
+3. [First Cabeceo]({{ "/org/challenge/firstcabeceo/#/" | relative_url }})
 4. First Recital
 5. DJ Lab
 6. Challenge Feast
@@ -19,7 +19,7 @@ title: The Tango Challenge
 
 [Weekly Journal](http://www.oxygentango.com/journal-tango-challenge)
 
-1. [Tango Turns](/org/challenge/tangoturns/#/)
+1. [Tango Turns]({{ "/org/challenge/tangoturns/#/" | relative_url }})
 2. Milonga Tanda
 3. Vals Tanda
 4. Compact Challenge

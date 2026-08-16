@@ -1,9 +1,52 @@
+# The previous `git-gateway` backend only works behind Netlify Identity, which
+# is not available when the site is hosted on GitHub Pages. The `github`
+# backend talks to the GitHub API directly.
+#
+# NOTE: the github backend still needs an OAuth client to log in with. Either
+# deploy one of the small OAuth proxies Decap documents and point `base_url` at
+# it, or switch back to `name: git-gateway` if you move the site to Netlify.
+# See https://decapcms.org/docs/backends-overview/
 backend:
-  name: git-gateway
-  branch: master # Branch to update (optional; defaults to master)
+  name: github
+  repo: pdamoc/tangomanual
+  branch: master
+  # base_url: https://your-oauth-proxy.example.com
 
-# This line should *not* be indented
 publish_mode: editorial_workflow
 
-media_folder: "assets/images/uploads" # Media files will be stored in the repo under static/images/uploads
-public_folder: "/assets/images/uploads" # The src attribute for uploaded media will begin with /images/uploads
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+
+# This key is required. It was missing before, so the admin page could only ever
+# show a config error. The fields below mirror the front matter already used by
+# the files in each folder.
+collections:
+  - name: missions
+    label: Missions
+    label_singular: Mission
+    folder: missions
+    create: true
+    slug: "{{slug}}"
+    identifier_field: title
+    fields:
+      - { name: title, label: Title, widget: string }
+      - { name: hashtag, label: Hashtag, widget: string, required: false,
+          hint: "Lowercase letters and underscores only. No dashes." }
+      - { name: youtube, label: YouTube video ID, widget: string, required: false }
+      - { name: tags, label: Tags, widget: list, required: false }
+      - { name: body, label: Body, widget: markdown }
+
+  - name: posts
+    label: Blog posts
+    label_singular: Blog post
+    folder: _posts
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    fields:
+      - { name: layout, label: Layout, widget: hidden, default: blog-post }
+      - { name: title, label: Title, widget: string }
+      - { name: subtitle, label: Subtitle, widget: string, required: false }
+      - { name: author, label: Author, widget: string }
+      - { name: date, label: Date, widget: datetime }
+      - { name: categories, label: Categories, widget: string, required: false }
+      - { name: body, label: Body, widget: markdown }

@@ -1,14 +1,13 @@
 ---
 ---
-{% if jekyll.environment == "production" %}
-@import "{{ site.theme }}";
-{% else %}
-@import "dev_site_theme";
-{% endif %}
+// Previously this imported `{{ site.theme }}` in production but a vendored,
+// hand-exported copy of the theme (_sass/_dev_site_theme.scss) in development,
+// so the two environments could drift apart. The theme is now a real gem
+// dependency, so both use the same source.
+//
+// `@use` replaces `@import`, which Dart Sass deprecated and will remove in 3.0.
+@use "{{ site.theme }}";
 
-@import "tm_additions";
-@import "blog_additions";
-@import "vue_app";
-
-
-
+@use "tm_additions";
+@use "blog_additions";
+@use "vue_app";

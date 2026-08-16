@@ -1,6 +1,49 @@
-gems:
-  - jekyll-readme-index
-  - jekyll-redirect-from
-  - jemoji
+title: "Operating Manual for Tango"
+description: "An open source approach to teaching tango."
+
+# Project site on GitHub Pages: https://pdamoc.github.io/tangomanual
+# `baseurl` is the path prefix. If you later attach a custom domain, set
+# `baseurl: ""` and `url` to that domain — nothing else needs to change,
+# because every internal link goes through the `relative_url` filter.
+url: "https://pdamoc.github.io"
+baseurl: "/tangomanual"
+
+theme: jekyll-theme-primer
+
+# Used for the "submit an issue" links.
+repository: pdamoc/tangomanual
 
 permalink: "/blog/:year/:month/:day/:title/"
+
+# Post permalinks contain the date, so without this the generated URL depends on
+# the timezone of whichever machine runs the build. UTC matches what GitHub
+# Pages used, so existing post URLs stay put.
+timezone: UTC
+
+sass:
+  # jekyll-theme-primer 0.6.0 still uses `/` for division, which Dart Sass
+  # deprecated. Silence warnings coming from dependencies, not from our own
+  # stylesheets.
+  quiet_deps: true
+
+# Renamed from `gems:` in Jekyll 3.5; `gems:` is an error in Jekyll 4.
+plugins:
+  - jekyll-default-layout
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-redirect-from
+  - jekyll-relative-links
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-titles-from-headings
+  - jemoji
+
+# Set this to a GA4 measurement ID (e.g. "G-XXXXXXXXXX") to enable analytics.
+# Left blank, no analytics script is emitted at all.
+google_analytics: ""
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - .github

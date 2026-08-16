@@ -21,7 +21,7 @@ When creating a mission-specific issue, please:
 * **Title:** 4-F: The steps in the description do not match the video. (contains the mission number and a one-line description)
 * **Description:** 3. Leader turns to the right does not correspond to the video which shows the leader turning to the left. (a very specific description)
 
-Here's a [link to this project's issues](https://github.com/andreimoment/tangomanual/issues).
+Here's a [link to this project's issues](https://github.com/pdamoc/tangomanual/issues).
 
 Here's GitHub's help page on [how to create an issue](https://help.github.com/articles/creating-an-issue/)
 

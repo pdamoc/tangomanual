@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ the_title }}</title>
-    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
   </head>
   <body>
     <div class="container markdown-body">
@@ -18,112 +18,123 @@
 
     </div>
 
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     {% if jekyll.environment == "production" %}
-      <script src="https://unpkg.com/vue@2.3.3/dist/vue.min.js"></script>
-      <script src="https://unpkg.com/vue-router@2.6.0/dist/vue-router.min.js"></script>
+      <script src="https://unpkg.com/vue@3.5.22/dist/vue.global.prod.js"></script>
+      <script src="https://unpkg.com/vue-router@4.5.1/dist/vue-router.global.prod.js"></script>
     {% else %}
-      <script src="https://unpkg.com/vue@2.3.3"></script>
-      <script src="https://unpkg.com/vue-router@2.6.0/dist/vue-router.js"></script>
+      <script src="https://unpkg.com/vue@3.5.22/dist/vue.global.js"></script>
+      <script src="https://unpkg.com/vue-router@4.5.1/dist/vue-router.global.js"></script>
     {% endif %}
 
     <script type="text/javascript">
 
-      var toc_component = Vue.component('toc-component', {
-        props: ["toc","page_title"],
-        template: '#toc-component-template',
-        data: function() {
-          return {}
-        }
-      })
+      var TocComponent = {
+        props: ["toc", "page_title"],
+        template: "#toc-component-template"
+      };
 
-      var mission_component = Vue.component('mission-component', {
+      var MissionComponent = {
         props: ["mission"],
-        template: '#mission-component-template',
+        template: "#mission-component-template",
+
         data: function() {
           return {
             loading: false,
             error: null,
             title: null,
             html: null
-          }
+          };
         },
 
         methods: {
-          fetch_data() {
+          fetch_data: function() {
+            var self = this;
+            var url = page_data.baseurl + "/missions/" + this.mission.id + "/index.html";
+
             this.loading = true;
             this.html = "Fetching mission content...";
             this.title = this.mission.name;
-            var component_this = this;
 
-            axios.get("/missions/"+ this.mission.id +"/index.html")
-              .then(function(response){
-                component_this.html = response.data;
-                component_this.loading = false;
-                component_this.error = null;
-
-                console.log("loading: " + location.pathname +" / "+ location.hash +" / "+ component_this.title);
-                ga('set', 'page', location.pathname + location.hash)
-                ga('send', {
-                  hitType: 'pageview',
-                  // page: location.pathname + location.hash,
-                  title: component_this.title
-                });
-
+            // Replaces the old axios dependency; fetch is available everywhere
+            // this site is expected to run.
+            fetch(url)
+              .then(function(response) {
+                if (!response.ok) {
+                  throw new Error("HTTP " + response.status + " " + response.statusText);
+                }
+                return response.text();
               })
-              .catch(function(error){
-                component_this.loading = false;
-                component_this.error = error;
+              .then(function(html) {
+                self.html = html;
+                self.loading = false;
+                self.error = null;
+
+                // Hash-routed views are not page loads, so report them by hand.
+                if (typeof gtag === "function") {
+                  gtag("event", "page_view", {
+                    page_path: location.pathname + location.hash,
+                    page_title: self.title
+                  });
+                }
               })
+              .catch(function(error) {
+                self.loading = false;
+                self.error = error.message;
+              });
           }
         },
-        created: function() {
-          this.fetch_data()
-        }
 
-      })
+        created: function() {
+          this.fetch_data();
+        }
+      };
 
       var mission_route_props = function(route) {
-        return {mission: {id: route.params.id, name: page_data.mission_names[route.params.id]} }
-      }
+        return {
+          mission: {
+            id: route.params.id,
+            name: page_data.mission_names[route.params.id]
+          }
+        };
+      };
 
-      var toc_route_props = function(route) {
-        return {toc: page_data.toc, page_title: page_data.title }
-      }
+      var toc_route_props = function() {
+        return { toc: page_data.toc, page_title: page_data.title };
+      };
 
       var routes = [
-        { path: '/', component: toc_component, props: toc_route_props },
-        { path: '/mission/:id', component: mission_component, props: mission_route_props },
-      ]
+        { path: "/", component: TocComponent, props: toc_route_props },
+        { path: "/mission/:id", component: MissionComponent, props: mission_route_props }
+      ];
 
-      var router = new VueRouter({
+      var router = VueRouter.createRouter({
+        history: VueRouter.createWebHashHistory(),
         routes: routes
-      })
+      });
 
-      var app = new Vue({
-        el: "#app",
-        router: router,
-        data: {
-          toc: page_data.toc,
-          page_data: page_data,
-          current_title: page_data.title,
+      var app = Vue.createApp({
+        data: function() {
+          return {
+            toc: page_data.toc,
+            page_data: page_data,
+            current_title: page_data.title
+          };
         },
+
         computed: {
           current_mission: function() {
-            if (this.$route.params.id) {
-              return this.$route.params.id
-            } else {
-              return null
-            }
+            return this.$route.params.id || null;
           }
-        },
+        }
+      });
 
-        methods: {},
+      app.component("toc-component", TocComponent);
+      app.component("mission-component", MissionComponent);
+      app.use(router);
 
-      }); // vue
-
-
-
+      router.isReady().then(function() {
+        app.mount("#app");
+      });
 
     </script>
 

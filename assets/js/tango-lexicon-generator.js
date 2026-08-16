@@ -3,11 +3,8 @@
 // based on the Tango Lexicon system by Mitra Martin and David Lampson
 
 
-console.log("tango-lexicon-generator")
-
-var vm = new Vue({
-  el: "#root",
-  data: {
+var app = Vue.createApp({
+  data: function() { return {
     "dict": {
       "parallel-forward-forward": "fool",
       "parallel-forward-open": "fairy",
@@ -88,8 +85,7 @@ var vm = new Vue({
       "word_list": true
     }
 
-
-  },
+  }; },
 
   computed: {
     formatted_sequence: function() {
@@ -120,8 +116,6 @@ var vm = new Vue({
 
   methods: {
     generate: function() {
-      console.log("generate!!")
-
       this.show.instructions = false
       this.generated_sequence = []
 
@@ -131,8 +125,6 @@ var vm = new Vue({
       if (form_data.dance_system == "parallel") { source_list = this.parallel.all  }
       if (form_data.dance_system == "cross") { source_list = this.cross.all  }
       if (form_data.dance_system == "both") { source_list = this.parallel.all.concat(this.cross.all)  }
-
-      console.log(form_data.moves, source_list)
       for (let i = 0; i < form_data.moves; i++) {
         this.generate_step(source_list)
       }
@@ -183,5 +175,7 @@ var vm = new Vue({
 
   }
 
-})
+});
+
+app.mount("#root");
 
