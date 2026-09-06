@@ -42,7 +42,7 @@ redirect_from: /v1/missions/index.html
 ### [4-C On-The-Body (Apilado)](missions/4-c)
 ### [4-D Open/Close](missions/4-d)
 ### [4-E Inline Walking (Caminar)](missions/4-e)
-### [4-F Clock Game - Bonus](missions/4-f)
+### [4-F Clock Game - Bonus 🚧](missions/4-f)
 ### [4-G Come & Go (Vaiven) - Bonus](missions/4-g)
 
 {% include tm/section_title.html section=5 size="2" number=true %}
@@ -67,28 +67,28 @@ redirect_from: /v1/missions/index.html
 
 {% include tm/section_title.html section=7 size="2" number=true %}
 
-### [7-A Extension Muscles ](missions/7-a)
-### [7-B Spiral-Turn](missions/7-b)
-### [7-C Turn Mirror](missions/7-c)
-### [7-D Chair Exercise](missions/7-d)
-### [7-E Boleo Drill](missions/7-e)
-### [7-F Shrinking Turn](missions/7-f)
-### [7-G Amague](missions/7-g)
-### [7-H Overturned Ochos](missions/7-h)
-### [7-I Urqiza Enrosque](missions/7-i)
-### [7-J Slo-Mo Walk](missions/7-j)
+### [7-A Extension Muscles 🚧](missions/7-a)
+### [7-B Spiral-Turn 🚧](missions/7-b)
+### [7-C Turn Mirror 🚧](missions/7-c)
+### [7-D Chair Exercise 🚧](missions/7-d)
+### [7-E Boleo Drill 🚧](missions/7-e)
+### [7-F Shrinking Turn 🚧](missions/7-f)
+### [7-G Amague 🚧](missions/7-g)
+### [7-H Overturned Ochos 🚧](missions/7-h)
+### [7-I Urqiza Enrosque 🚧](missions/7-i)
+### [7-J Slo-Mo Walk 🚧](missions/7-j)
 
 {% include tm/section_title.html section=8 size="2" number=true %}
 
-### [8-A The Balance Challenge](missions/8-a)
-### [8-B Following the Follower](missions/8-b)
-### [8-C Switch!](missions/8-c)
-### [8-D Constraints Tanda](missions/8-d)
+### [8-A The Balance Challenge 🚧](missions/8-a)
+### [8-B Following the Follower 🚧](missions/8-b)
+### [8-C Switch! 🚧](missions/8-c)
+### [8-D Constraints Tanda 🚧](missions/8-d)
 
 {% include tm/section_title.html section=9 size="2" number=true %}
 
 ### [AP-A The 12 Fundamental Techniques of Tango](appendix/ap-a-the-12-fundamental-techniques-of-tango.md)
-### AP-B How This Manual Works (TBA)
+### AP-B How This Manual Works (TBA) 🚧
 ### [AP-C Glossary of Terms](appendix/ap-c-glossary-of-terms.md)
 ### [AP-D How to Be A Teaching Buddy (A Crash Course)](appendix/ap-d-how-to-be-a-teaching-buddy.md)
 ### [AP-E Anatomy of a Mission](appendix/ap-e-anatomy-of-a-mission.md)

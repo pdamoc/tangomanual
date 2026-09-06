@@ -1,0 +1,23 @@
+# Romanian translation of the ring/section titles in tm_v1.yml.
+# Keep the entries in the same order as tm_v1.yml — they are looked up by index.
+section:
+  - title: none
+    color: none
+  - title: "Inelul Roșu - Start Rapid"
+    color: red
+  - title: "Inelul Portocaliu - Ooh Ocho"
+    color: orange
+  - title: "Inelul Galben - Milonga Bam!"
+    color: yellow
+  - title: "Inelul Verde - Îmbrățișare și Mers"
+    color: green
+  - title: "Inelul Albastru - Groove Milonguero"
+    color: blue
+  - title: "Inelul Violet - Salon"
+    color: purple
+  - title: "Zona Roz - Tehnică"
+    color: pink
+  - title: "Zona Albă - Jocuri de Practică"
+    color: white
+  - title: "Anexe"
+    color: black

@@ -1,0 +1,43 @@
+{% comment %}
+Sticky page header: "back to the TOC" link on the left, language switcher on
+the right. On the TOC page itself the left link goes to the home page instead.
+The Romanian manual lives under /ro/ and mirrors the English tree ("/" and
+"/v1/..."); pages outside the translated tree link to the Romanian home page,
+so the switcher never produces a 404.
+{% endcomment %}
+{% if page.lang == "ro" %}
+  {% assign toc_url = "/ro/v1/" %}
+  {% assign home_url = "/ro/" %}
+{% else %}
+  {% assign toc_url = "/v1/" %}
+  {% assign home_url = "/" %}
+{% endif %}
+{% if page.lang == "ro" %}
+  {% assign en_url = page.url | remove_first: "/ro" %}
+  {% if en_url == "" %}{% assign en_url = "/" %}{% endif %}
+  {% assign ro_url = page.url %}
+{% else %}
+  {% assign en_url = page.url %}
+  {% if page.url == "/" or page.url contains "/v1/" %}
+    {% assign ro_url = "/ro" | append: page.url %}
+  {% else %}
+    {% assign ro_url = "/ro/" %}
+  {% endif %}
+{% endif %}
+<header class="site-header">
+  <div class="site-header-inner">
+    {% if page.url == toc_url %}
+    <a class="toc-link" href="{{ home_url | relative_url }}">&larr; {% if page.lang == "ro" %}Acasă{% else %}Home{% endif %}</a>
+    {% else %}
+    <a class="toc-link" href="{{ toc_url | relative_url }}">&larr; {% if page.lang == "ro" %}Cuprins{% else %}TOC{% endif %}</a>
+    {% endif %}
+    <div class="lang-switcher">
+      🌐
+      {% if page.lang == "ro" %}
+      <a href="{{ en_url | relative_url }}">English</a> | <strong>Română</strong>
+      {% else %}
+      <strong>English</strong> | <a href="{{ ro_url | relative_url }}">Română</a>
+      {% endif %}
+    </div>
+  </div>
+</header>

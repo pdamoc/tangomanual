@@ -1,6 +1,11 @@
-<h{{include.size}} class="section-title {{ site.data.tm_v1["section"][include.section].color }}">
+{% if page.lang == "ro" %}
+  {% assign tm_sections = site.data.tm_v1_ro["section"] %}
+{% else %}
+  {% assign tm_sections = site.data.tm_v1["section"] %}
+{% endif %}
+<h{{include.size}} class="section-title {{ tm_sections[include.section].color }}">
   {% if include.number==true %}
   {{ include.section }}&nbsp;
   {% endif %}
-  {{ site.data.tm_v1["section"][include.section].title }}
+  {{ tm_sections[include.section].title }}
 </h{{include.size}}>

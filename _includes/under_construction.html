@@ -1,0 +1,13 @@
+{% comment %}
+Shown on mission pages whose video is still the placeholder
+(vSjX02FIZCk) — the mission itself is not finished yet.
+{% endcomment %}
+{% if page.youtube contains "vSjX02FIZCk" %}
+<div class="under-construction" style="border: 2px dashed #d9822b; border-radius: 6px; background: #fff8f0; color: #7a4510; padding: 0.6em 1em; margin: 1em 0; font-weight: bold;">
+  {% if page.lang == "ro" %}
+  🚧 Această pagină este încă în construcție. 🚧
+  {% else %}
+  🚧 This page is still under construction. 🚧
+  {% endif %}
+</div>
+{% endif %}

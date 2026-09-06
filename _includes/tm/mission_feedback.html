@@ -1,3 +1,9 @@
+{% if page.lang == "ro" %}
+<h3>Corecturi? Întrebări? Sugestii?</h3>
+
+Dacă ai sugestii pentru îmbunătățirea acestei misiuni, te rugăm să <a href="https://github.com/{{ site.repository }}/issues">deschizi un issue pe GitHub</a> și să menționezi numărul misiunii. Pentru orice altceva, inclusiv idei de misiuni noi, împărtășirea experienței tale sau interesul de a învăța să predai acest manual, <a href="mailto:tangomanual@gmail.com?subject={{page.section}}-{{page.mission}} Mission Feedback (v.{{page.manual_version}})">scrie-ne un email</a>.
+{% else %}
 <h3>Fixes? Questions? Feedback?</h3>
 
 If you have suggestions for improving this mission, please <a href="https://github.com/{{ site.repository }}/issues">submit an issue on GitHub</a> and include the mission number.  For anything else incluing new mission ideas, sharing your experience, or your interest in learning to teach this manual, <a href="mailto:tangomanual@gmail.com?subject={{page.section}}-{{page.mission}} Mission Feedback (v.{{page.manual_version}})">get in touch via email</a>.
+{% endif %}

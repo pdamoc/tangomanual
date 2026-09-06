@@ -38,6 +38,20 @@ plugins:
   - jekyll-titles-from-headings
   - jemoji
 
+# Language handling: the Romanian translation mirrors the English tree under
+# /ro/. Pages there automatically get `lang: ro`, which the layouts and
+# includes use to pick the right language for chrome text (headers, footers,
+# ring titles from _data/tm_v1_ro.yml) and the language switcher.
+defaults:
+  - scope:
+      path: ""
+    values:
+      lang: "en"
+  - scope:
+      path: "ro"
+    values:
+      lang: "ro"
+
 # Set this to a GA4 measurement ID (e.g. "G-XXXXXXXXXX") to enable analytics.
 # Left blank, no analytics script is emitted at all.
 google_analytics: ""
