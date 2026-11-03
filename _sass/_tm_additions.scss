@@ -66,9 +66,77 @@
   font-size: 0.9em;
 }
 
-.site-header .toc-link {
+// Header links rendered as buttons so they are easy to hit, especially on
+// touch devices.
+.site-header .header-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 12px;
+  border: 1px solid #d1d5da;
+  border-radius: 6px;
+  background: #fafbfc;
+  color: #24292e;
   font-weight: 600;
+  line-height: 1.4;
   text-decoration: none;
+  white-space: nowrap;
+}
+
+.site-header a.header-btn:hover {
+  background: #eff2f5;
+  text-decoration: none;
+}
+
+.site-header .lang-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+// The two languages form one segmented control; the current language is the
+// filled, non-clickable segment.
+.site-header .lang-seg {
+  display: inline-flex;
+}
+
+.site-header .lang-seg .lang-btn {
+  border-radius: 0;
+}
+
+.site-header .lang-seg .lang-btn:first-child {
+  border-radius: 6px 0 0 6px;
+}
+
+.site-header .lang-seg .lang-btn:last-child {
+  border-radius: 0 6px 6px 0;
+  margin-left: -1px;
+}
+
+.site-header .lang-btn.is-active {
+  background: #0366d6;
+  border-color: #0366d6;
+  color: #fff;
+  position: relative; // keep the filled border on top of the overlapped edge
+}
+
+// Tablet and mobile: grow everything to comfortable touch-target size
+// (~44px tall) and give the two sides room to breathe.
+@media (max-width: 1024px) {
+  .site-header-inner {
+    font-size: 1em;
+    padding: 8px 12px;
+    gap: 12px;
+  }
+
+  .site-header .header-btn {
+    padding: 9px 16px;
+    min-height: 44px;
+  }
+
+  .site-header .lang-globe {
+    display: none; // decorative; free up space for the buttons on phones
+  }
 }
 
 // make the container responsive and add margins for small screens

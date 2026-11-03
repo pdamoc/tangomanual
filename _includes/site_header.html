@@ -27,17 +27,19 @@ so the switcher never produces a 404.
 <header class="site-header">
   <div class="site-header-inner">
     {% if page.url == toc_url %}
-    <a class="toc-link" href="{{ home_url | relative_url }}">&larr; {% if page.lang == "ro" %}Acasă{% else %}Home{% endif %}</a>
+    <a class="header-btn toc-link" href="{{ home_url | relative_url }}">&larr; {% if page.lang == "ro" %}Acasă{% else %}Home{% endif %}</a>
     {% else %}
-    <a class="toc-link" href="{{ toc_url | relative_url }}">&larr; {% if page.lang == "ro" %}Cuprins{% else %}TOC{% endif %}</a>
+    <a class="header-btn toc-link" href="{{ toc_url | relative_url }}">&larr; {% if page.lang == "ro" %}Cuprins{% else %}TOC{% endif %}</a>
     {% endif %}
     <div class="lang-switcher">
-      🌐
-      {% if page.lang == "ro" %}
-      <a href="{{ en_url | relative_url }}">English</a> | <strong>Română</strong>
-      {% else %}
-      <strong>English</strong> | <a href="{{ ro_url | relative_url }}">Română</a>
-      {% endif %}
+      <span class="lang-globe" aria-hidden="true">🌐</span>
+      <span class="lang-seg">
+        {% if page.lang == "ro" %}
+        <a class="header-btn lang-btn" href="{{ en_url | relative_url }}">English</a><span class="header-btn lang-btn is-active">Română</span>
+        {% else %}
+        <span class="header-btn lang-btn is-active">English</span><a class="header-btn lang-btn" href="{{ ro_url | relative_url }}">Română</a>
+        {% endif %}
+      </span>
     </div>
   </div>
 </header>
