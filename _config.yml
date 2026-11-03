@@ -1,12 +1,12 @@
 title: "Operating Manual for Tango"
 description: "An open source approach to teaching tango."
 
-# Project site on GitHub Pages: https://pdamoc.github.io/tangomanual
-# `baseurl` is the path prefix. If you later attach a custom domain, set
-# `baseurl: ""` and `url` to that domain — nothing else needs to change,
-# because every internal link goes through the `relative_url` filter.
-url: "https://pdamoc.github.io"
-baseurl: "/tangomanual"
+# Served from the custom domain manual.awakentango.com (CNAME to
+# pdamoc.github.io, custom domain set in the repo's Pages settings). Every
+# internal link goes through the `relative_url` filter, so moving the site is
+# just a matter of changing `url`/`baseurl` here.
+url: "https://manual.awakentango.com"
+baseurl: ""
 
 theme: jekyll-theme-primer
 

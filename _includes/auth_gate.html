@@ -1,0 +1,31 @@
+{% comment %}
+Soft access gate: visitors must arrive once with ?auth=true (the link handed
+out by the GET FREE ACCESS form on www.awakentango.com); the grant is kept in
+localStorage so navigation inside the manual keeps working. Anyone without it
+is sent to the onboarding page. This is lead capture, not security — the
+content is public and the repo is open source. Runs inline in <head> so the
+redirect happens before anything renders. localhost is exempt so local
+`jekyll serve` previews stay usable.
+{% endcomment %}
+<script>
+  (function () {
+    var host = location.hostname;
+    if (host === "localhost" || host === "127.0.0.1" || host === "[::1]") return;
+    var KEY = "tm-auth";
+    try {
+      var params = new URLSearchParams(location.search);
+      if (params.get("auth") === "true") {
+        localStorage.setItem(KEY, "true");
+        params.delete("auth");
+        var qs = params.toString();
+        history.replaceState(null, "", location.pathname + (qs ? "?" + qs : "") + location.hash);
+      }
+      if (localStorage.getItem(KEY) !== "true") {
+        location.replace("https://www.awakentango.com/onboard");
+      }
+    } catch (e) {
+      /* Storage unavailable (e.g. blocked site data): fail open rather than
+         bounce authorized readers to the onboarding page on every click. */
+    }
+  })();
+</script>
